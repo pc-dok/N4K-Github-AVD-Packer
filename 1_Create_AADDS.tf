@@ -87,7 +87,8 @@ resource "azurerm_subnet_network_security_group_association" "aadds-nsg-assoc" {
 // NOTE: If SPN is existing you can delete with: az ad sp delete --id "your id from the error message"
 
 resource "azuread_service_principal" "aadds" {
-  application_id = "2565bd9d-da50-47d4-8b85-4c97f669dc36"
+  application_id  = "2565bd9d-da50-47d4-8b85-4c97f669dc36"
+  use-existing    = true
 }
 
 /*
