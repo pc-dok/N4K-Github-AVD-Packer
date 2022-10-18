@@ -88,7 +88,7 @@ resource "azurerm_subnet_network_security_group_association" "aadds-nsg-assoc" {
 
 resource "azuread_service_principal" "aadds" {
   application_id  = "2565bd9d-da50-47d4-8b85-4c97f669dc36"
-  use-existing    = true
+  use_existing    = true
 }
 
 /*
