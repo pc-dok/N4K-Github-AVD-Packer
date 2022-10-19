@@ -92,7 +92,8 @@ resource "azurerm_role_assignment" "packer_artifacts_contributor" {
 resource "github_repository" "packer_windows_avd" {
   name        = "N4K-Github-AVD-Packer-Build"
   description = "Create Win11 and Win2033 Images with Packer"
-  visibility = "private"
+  visibility  = "private"
+  auto_init   = true
 }
 
 # Azure CLI Authentication
@@ -151,14 +152,12 @@ resource "github_actions_secret" "packer_build_resource_group" {
   plaintext_value = azurerm_resource_group.packer_build.name
 }
 
-resource "github_repository_file" "biceps" {
+resource "github_repository_file" "foo" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
-  file                = "biceps.test"
-  content             = ""
+  file                = ".gitignore"
+  content             = "**/*.tfstate"
   commit_message      = "Managed by Terraform"
-  commit_author       = "pc-dok"
-  commit_email        = "info@n4k.at"
   overwrite_on_create = true
 }
 
