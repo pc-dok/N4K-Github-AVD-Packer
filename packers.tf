@@ -228,6 +228,7 @@ resource "github_repository_file" "serverpkrhcl" {
   branch              = "main"
   file                = "server.pkr.hcl"
   content             = <<EOT
+# Server 2022  
 variable "client_id" {
   type        = string
   description = "Azure Service Principal App ID."
@@ -356,7 +357,9 @@ build {
     ]
   }
 }
+# End
 EOT
+  
   commit_message      = "Create server.pkr.hcl"
   overwrite_on_create = true
 }
