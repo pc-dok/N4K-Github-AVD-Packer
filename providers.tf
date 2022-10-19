@@ -6,6 +6,13 @@ terraform {
       name = "N4K-Github-AVD-Packer"
     }
   }
+  
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 4.10"
+    }
+  }
 }
 
 provider "azurerm" {
@@ -14,4 +21,9 @@ provider "azurerm" {
   client_secret   = var.ARM_CLIENT_SECRET
   tenant_id       = var.ARM_TENANT_ID
   features {}
+}
+
+provider "github" {
+  token = "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"
+  owner = "pc-dok"
 }
