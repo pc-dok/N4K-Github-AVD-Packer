@@ -227,7 +227,8 @@ resource "github_repository_file" "serverpkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "server.pkr.hcl"
-  content             = yamlencode(<<-EOT
+  content             = yamlencode(
+    
 # Server 2022  
 variable "client_id" {
   type        = string
@@ -358,7 +359,6 @@ build {
   }
 }
 # End
-EOT
 )
   
   commit_message      = "Create server.pkr.hcl"
@@ -369,7 +369,8 @@ resource "github_repository_file" "win11pkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "windows.pkr.hcl"
-  content             = yamlencode(<<-EOT
+  content             = yamlencode(
+    
 # Windows 11  
 variable "client_id" {
   type        = string
@@ -500,7 +501,6 @@ build {
   }
 }
 #End
-EOT
 )
   
   commit_message      = "Create windows.pkr.hcl"
@@ -511,7 +511,8 @@ resource "github_repository_file" "packerserver2022yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = ".github/workflows/packer_server2022.yml"
-  content             = yamlencode(<<-EOT
+  content             = yamlencode(
+    
 name: Packer Server 2022
 
 on:
@@ -791,7 +792,6 @@ jobs:
               --mode Complete \
               --resource-group "${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}" \
               --template-file cleanup-resource-group.bicep
-EOT
 )
   
   commit_message      = "Create packer_win11.yml"
