@@ -227,7 +227,7 @@ resource "github_repository_file" "serverpkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "server.pkr.hcl"
-  content             = <<EOT
+  content             = <<-EOT
 # Server 2022  
 variable "client_id" {
   type        = string
@@ -368,7 +368,7 @@ resource "github_repository_file" "win11pkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "windows.pkr.hcl"
-  content             = <<EOT
+  content             = <<-EOT
 # Windows 11  
 variable "client_id" {
   type        = string
@@ -509,7 +509,7 @@ resource "github_repository_file" "packerserver2022yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = ".github/workflows/packer_server2022.yml"
-  content             = <<EOT
+  content             = <<-EOT
 name: Packer Server 2022
 
 on:
@@ -654,7 +654,7 @@ resource "github_repository_file" "packerwin11yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = ".github/workflows/packer_win11.yml"
-  content             = <<EOT
+  content             = <<-EOT
 name: Packer Windows 11
 
 on:
