@@ -227,7 +227,7 @@ resource "github_repository_file" "serverpkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "server.pkr.hcl"
-  content             = yamlencode(
+  content             = yamlencode(<<EOT
 # Server 2022  
 variable "client_id" {
   type        = string
@@ -358,6 +358,7 @@ build {
   }
 }
 # End
+EOT
 )
   
   commit_message      = "Create server.pkr.hcl"
