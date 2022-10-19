@@ -165,7 +165,7 @@ resource "github_repository_file" "packages" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "packages.config"
-  content             = <<EOT
+  content             = <<-EOT
 <?xml version="1.0" encoding="utf-8"?>
 <packages>
   <!-- FSLogix -->
@@ -189,7 +189,7 @@ resource "github_repository_file" "installposhaz" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "install-azure-powershell.ps1"
-  content             = <<EOT
+  content             = <<-EOT
 $ErrorActionPreference = "Stop"
 
 $downloadUrl = "https://github.com/Azure/azure-powershell/releases/download/v7.3.2-March2022/Az-Cmdlets-7.3.2.35305-x64.msi"
@@ -310,7 +310,7 @@ source "azure-arm" "avd" {
   # Destination Image
 
   managed_image_resource_group_name = var.artifacts_resource_group
-  managed_image_name                = "${var.source_image_sku}-${var.source_image_version}"
+  > yamlencode(managed_image_name                = "${var.source_image_sku}-${var.source_image_version}")
 
   # Packer Computing Resources
 
