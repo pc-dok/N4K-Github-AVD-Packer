@@ -310,7 +310,7 @@ source "azure-arm" "avd" {
   # Destination Image
 
   managed_image_resource_group_name = var.artifacts_resource_group
-  managed_image_name                = ["${var.source_image_sku}-${var.source_image_version}"]
+  managed_image_name                = "$[{var.source_image_sku}]-$[{var.source_image_version}]"
 
   # Packer Computing Resources
 
