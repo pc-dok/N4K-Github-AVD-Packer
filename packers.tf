@@ -166,22 +166,20 @@ resource "github_repository_file" "packages" {
   branch              = "main"
   file                = "packages.config"
   content             = <<EOT
-  
-  <?xml version="1.0" encoding="utf-8"?>
-  <packages>
-    <!-- FSLogix -->
-    <package id="fslogix" />
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <!-- FSLogix -->
+  <package id="fslogix" />
 
-    <!-- Editors -->
-    <package id="notepadplusplus" />
+  <!-- Editors -->
+  <package id="notepadplusplus" />
 
-    <!-- Common Apps -->
-    <package id="7zip" />
-    <package id="foxitreader" />
-    <package id="keepassxc" />
-  </packages>
-    
-  EOT
+  <!-- Common Apps -->
+  <package id="7zip" />
+  <package id="foxitreader" />
+  <package id="keepassxc" />
+</packages>
+EOT
   
   commit_message      = "Create packages.config"
   overwrite_on_create = true
