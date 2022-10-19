@@ -356,6 +356,7 @@ build {
     ]
   }
 }
+EOT
   commit_message      = "Create server.pkr.hcl"
   overwrite_on_create = true
 }
