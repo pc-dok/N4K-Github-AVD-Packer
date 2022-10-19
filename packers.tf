@@ -227,7 +227,7 @@ resource "github_repository_file" "serverpkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "server.pkr.hcl"
-  content             = <<-EOT
+  content             = yamlencode(
 # Server 2022  
 variable "client_id" {
   type        = string
@@ -310,7 +310,7 @@ source "azure-arm" "avd" {
   # Destination Image
 
   managed_image_resource_group_name = var.artifacts_resource_group
-  > yamlencode(managed_image_name                = "${var.source_image_sku}-${var.source_image_version}")
+  managed_image_name                = "${var.source_image_sku}-${var.source_image_version}"
 
   # Packer Computing Resources
 
@@ -358,7 +358,7 @@ build {
   }
 }
 # End
-EOT
+)
   
   commit_message      = "Create server.pkr.hcl"
   overwrite_on_create = true
