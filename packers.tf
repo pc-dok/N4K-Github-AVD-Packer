@@ -151,6 +151,17 @@ resource "github_actions_secret" "packer_build_resource_group" {
   plaintext_value = azurerm_resource_group.packer_build.name
 }
 
+resource "github_repository_file" "biceps" {
+  repository          = github_repository.packer_windows_avd.name
+  branch              = "main"
+  file                = "biceps.test"
+  content             = ""
+  commit_message      = "Managed by Terraform"
+  commit_author       = "pc-dok"
+  commit_email        = "info@n4k.at"
+  overwrite_on_create = true
+}
+
 # Outputs to run Packer locally
 
 output "packer_artifacts_resource_group" {
