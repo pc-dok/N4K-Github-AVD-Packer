@@ -185,6 +185,44 @@ EOT
   overwrite_on_create = true
 }
 
+resource "github_repository_file" "installposhaz" {
+  repository          = github_repository.packer_windows_avd.name
+  branch              = "main"
+  file                = "install-azure-powershell.ps1"
+  content             = <<EOT
+$ErrorActionPreference = "Stop"
+
+$downloadUrl = "https://github.com/Azure/azure-powershell/releases/download/v7.3.2-March2022/Az-Cmdlets-7.3.2.35305-x64.msi"
+$outFile = "D:\az_pwsh.msi" # temporary disk
+
+Write-Host "Downloading $downloadUrl ..."
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Invoke-WebRequest -Uri $downloadUrl -OutFile $outFile
+
+Write-Host "Installing AZ Shell CMD"
+Start-Process "msiexec.exe" -Wait -ArgumentList "/package $outFile"
+
+#Add Windows Features for Administrate than AADDS with this Client
+Write-Host "Add Windows Features - RSAT Tools - for Active Directory Management"
+Add-WindowsFeature "RSAT-AD-Tools" -verbose
+
+Write-Host "Add Windows Features DNS Management"
+Add-WindowsFeature -Name "dns" -IncludeAllSubFeature -IncludeManagementTools -verbose
+
+Write-Host "Add Windows Features GPMC Management"
+Add-WindowsFeature -Name "gpmc" -IncludeAllSubFeature -IncludeManagementTools -verbose
+
+#Disable Server Manager on Logon
+Write-Host "Disable Server Manager on Logon"
+Get-ScheduledTask -TaskName ServerManager | Disable-ScheduledTask -Verbose
+
+Write-Host "All done!"
+EOT
+  
+  commit_message      = "Create install-azure-powershell.ps1"
+  overwrite_on_create = true
+}
+
 # Outputs to run Packer locally
 
 output "packer_artifacts_resource_group" {
