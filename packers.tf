@@ -52,7 +52,7 @@ resource "azurerm_resource_group" "packer_build" {
 # Service Principal Used By Packer
 
 resource "azuread_application" "packer" {
-  display_name = "packer-sp-app"
+  display_name = "n4k-we-app-packer-avd"
 }
 
 resource "azuread_service_principal" "packer" {
