@@ -165,7 +165,8 @@ resource "github_repository_file" "packages" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "packages.config"
-  content             = "{
+  content             = <<EOT
+  
   <?xml version="1.0" encoding="utf-8"?>
   <packages>
     <!-- FSLogix -->
@@ -178,8 +179,10 @@ resource "github_repository_file" "packages" {
     <package id="7zip" />
     <package id="foxitreader" />
     <package id="keepassxc" />
-  </packages>}
-  "
+  </packages>
+    
+  EOT
+  
   commit_message      = "Create packages.config"
   overwrite_on_create = true
 }
