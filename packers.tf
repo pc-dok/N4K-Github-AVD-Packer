@@ -152,12 +152,35 @@ resource "github_actions_secret" "packer_build_resource_group" {
   plaintext_value = azurerm_resource_group.packer_build.name
 }
 
-resource "github_repository_file" "foo" {
+resource "github_repository_file" "biceps" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
-  file                = ".gitignore"
-  content             = "**/*.tfstate"
-  commit_message      = "Managed by Terraform"
+  file                = "cleanup-resource-group.bicep"
+  content             = ""
+  commit_message      = "Create cleanup-resource-group.bicep"
+  overwrite_on_create = true
+}
+
+resource "github_repository_file" "packages" {
+  repository          = github_repository.packer_windows_avd.name
+  branch              = "main"
+  file                = "packages.config"
+  content             = "
+  <?xml version="1.0" encoding="utf-8"?>
+  <packages>
+    <!-- FSLogix -->
+    <package id="fslogix" />
+
+    <!-- Editors -->
+    <package id="notepadplusplus" />
+
+    <!-- Common Apps -->
+    <package id="7zip" />
+    <package id="foxitreader" />
+    <package id="keepassxc" />
+  </packages>
+  "
+  commit_message      = "Create packages.config"
   overwrite_on_create = true
 }
 
