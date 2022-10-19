@@ -99,6 +99,18 @@ variable "tagtypekeyvault1" {
 }
 
 # Main
+variable "artifacts" {
+  type        = string
+  default     = "n4k-we-packer-avd-images"
+  description = "The location from Azure Ressource"
+}
+
+variable "builder" {
+  type        = string
+  default     = "n4k-we-packer-avd-build"
+  description = "The location from Azure Ressource"
+}
+
 variable "rg" {
   type        = string
   default     = "n4k-we-aadds"
