@@ -6,6 +6,11 @@ data "azurerm_virtual_network" "aadds-vnet" {
   name                = "azurerm_virtual_network.aadds-vnet.id"
   resource_group_name = "n4k-we-aadds"
 }
+  
+data "azurerm_virtual_network" "aadds-vnet" {
+  name                = "azurerm_virtual_network.aadds-vnet.name"
+  resource_group_name = "n4k-we-aadds"
+}
 
 resource "azurerm_resource_group" "wvd" {
   name     = var.rg-wvd
@@ -116,18 +121,16 @@ resource "azurerm_virtual_network_peering" "wvd-to-aadds" {
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
   use_remote_gateways          = false
-  depends_on                   = [azurerm_virtual_network.wvd]
 }
 
 resource "azurerm_virtual_network_peering" "aadds-to-wvd" {
   name                         = var.vnet-peering-aadds-to-wvd
   resource_group_name          = var.rg
-  virtual_network_name         = azurerm_virtual_network.aadds-vnet.name
+  virtual_network_name         = data.azurerm_virtual_network.aadds-vnet.name
   remote_virtual_network_id    = azurerm_virtual_network.wvd.id
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
   use_remote_gateways          = false
-  depends_on                   = [azurerm_virtual_network.aadds-vnet]
 }
 
 // NOTE: Create the Keyvault in Azure West Europe
