@@ -1,4 +1,4 @@
-name: 'Terraform PLAN'
+name: 'Create Packer ENV'
 
 on:
   push:
@@ -32,12 +32,12 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-    
-    # Checks that all Terraform configuration files adhere to a canonical format
-    #- name: Terraform Format
-    #  run: terraform fmt -check
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
+      
+    # Apply the plan and push it
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false
       
