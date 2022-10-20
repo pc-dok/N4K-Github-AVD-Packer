@@ -1,17 +1,24 @@
 // NOTE: Create the Ressource Groups in Azure West Europe for the Azure Virtual Desktop Service
 # Import first the data because we use 3 github workflow actions with different terrafrom cloud workspaces
+# Import Data from the Packer Image
+data "azurerm_image" "win2022" {
+  name                = "2022-datacenter-azure-edition-smalldisk-20348.887.220806"
+  resource_group_name = "n4k-we-packer-avd-images"
+}
+  
 # Import Data from the AADDS
   
 data "azurerm_virtual_network" "aadds-vnet-id" {
-  name                = "azurerm_virtual_network.aadds-vnet.id"
+  name                = "azurerm_virtual_network.vnet-we-aadds.id"
   resource_group_name = "n4k-we-aadds"
 }
   
 data "azurerm_virtual_network" "aadds-vnet-name" {
-  name                = "azurerm_virtual_network.aadds-vnet.name"
+  name                = "azurerm_virtual_network.vnet-we-aadds.name"
   resource_group_name = "n4k-we-aadds"
 }
-  
+
+# Create the RG
 resource "azurerm_resource_group" "wvd" {
   name     = var.rg-wvd
   location = var.location
@@ -304,13 +311,6 @@ resource "azurerm_network_interface" "jh" {
     "2_Type"  = var.tagtypenicjh
   }
 }
-
-# Import Data from the Packer Image
-data "azurerm_image" "win2022" {
-  name                = "2022-datacenter-azure-edition-smalldisk-20348.887.220806"
-  resource_group_name = "n4k-we-packer-avd-images"
-}
-
 
 resource "azurerm_windows_virtual_machine" "jh" {
   name                = var.jh_name
