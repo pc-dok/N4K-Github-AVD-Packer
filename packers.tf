@@ -370,7 +370,6 @@ resource "github_repository_file" "win11pkrhcl" {
   branch              = "main"
   file                = "windows.pkr.hcl"
   content             = <<-EOT
-    
 # Windows 11  
 variable "client_id" {
   type        = string
@@ -544,7 +543,7 @@ jobs:
         with:
           azcliversion: 2.34.1
           inlineScript: |
-            latest_version=$$(
+            latest_version=$(
               az vm image list \
                 --publisher "$${IMAGE_PUBLISHER}" \
                 --offer "$${IMAGE_OFFER}" \
@@ -689,7 +688,7 @@ jobs:
         with:
           azcliversion: 2.34.1
           inlineScript: |
-            latest_version=$$(
+            latest_version=$(
               az vm image list \
                 --publisher "$${IMAGE_PUBLISHER}" \
                 --offer "$${IMAGE_OFFER}" \
