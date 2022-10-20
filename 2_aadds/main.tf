@@ -90,7 +90,6 @@ resource "azuread_service_principal" "aadds" {
   application_id = "2565bd9d-da50-47d4-8b85-4c97f669dc36"
 }
 
-/*
 // NOTE: Create the Azure Active Domain Directory Service 
 
 resource "azurerm_active_directory_domain_service" "aadds" {
@@ -125,4 +124,3 @@ resource "azurerm_active_directory_domain_service" "aadds" {
     azurerm_subnet_network_security_group_association.aadds-nsg-assoc,
   ]
 }
-*/
