@@ -227,7 +227,7 @@ resource "github_repository_file" "serverpkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "server.pkr.hcl"
-  content             = yamlencode(
+  content             = <<-EOT
     
 # Server 2022  
 variable "client_id" {
@@ -311,7 +311,7 @@ source "azure-arm" "avd" {
   # Destination Image
 
   managed_image_resource_group_name = var.artifacts_resource_group
-  managed_image_name                = "${var.source_image_sku}-${var.source_image_version}"
+  managed_image_name                = "$${var.source_image_sku}-$${var.source_image_version}"
 
   # Packer Computing Resources
 
@@ -359,7 +359,7 @@ build {
   }
 }
 # End
-)
+EOT
   
   commit_message      = "Create server.pkr.hcl"
   overwrite_on_create = true
@@ -369,7 +369,7 @@ resource "github_repository_file" "win11pkrhcl" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = "windows.pkr.hcl"
-  content             = yamlencode(
+  content             = <<-EOT
     
 # Windows 11  
 variable "client_id" {
@@ -453,7 +453,7 @@ source "azure-arm" "avd" {
   # Destination Image
 
   managed_image_resource_group_name = var.artifacts_resource_group
-  managed_image_name                = "${var.source_image_sku}-${var.source_image_version}"
+  managed_image_name                = "$${var.source_image_sku}-$${var.source_image_version}"
 
   # Packer Computing Resources
 
@@ -501,7 +501,7 @@ build {
   }
 }
 #End
-)
+EOT
   
   commit_message      = "Create windows.pkr.hcl"
   overwrite_on_create = true
@@ -511,8 +511,7 @@ resource "github_repository_file" "packerserver2022yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = ".github/workflows/packer_server2022.yml"
-  content             = yamlencode(
-    
+  content             = <<-EOT
 name: Packer Server 2022
 
 on:
@@ -532,12 +531,12 @@ jobs:
     name: Get latest Windows version from Azure
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.get_latest_version.outputs.version }}
+      version: $${{ steps.get_latest_version.outputs.version }}
     steps:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: $${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Get Latest Version
         id: get_latest_version
@@ -545,34 +544,34 @@ jobs:
         with:
           azcliversion: 2.34.1
           inlineScript: |
-            latest_version=$(
+            latest_version=$$(
               az vm image list \
-                --publisher "${IMAGE_PUBLISHER}" \
-                --offer "${IMAGE_OFFER}" \
-                --sku "${IMAGE_SKU}" \
+                --publisher "$${IMAGE_PUBLISHER}" \
+                --offer "$${IMAGE_OFFER}" \
+                --sku "$${IMAGE_SKU}" \
                 --all \
                 --query "[*].version | sort(@)[-1:]" \
                 --out tsv
             )
 
-            echo "Publisher: ${IMAGE_PUBLISHER}"
-            echo "Offer:     ${IMAGE_OFFER}"
-            echo "SKU:       ${IMAGE_SKU}"
-            echo "Version:   ${latest_version}"
+            echo "Publisher: $${IMAGE_PUBLISHER}"
+            echo "Offer:     $${IMAGE_OFFER}"
+            echo "SKU:       $${IMAGE_SKU}"
+            echo "Version:   $${latest_version}"
 
-            echo "::set-output name=version::${latest_version}"
+            echo "::set-output name=version::$${latest_version}"
 
   check_image_exists:
     name: Check if latest version has already been built
     runs-on: ubuntu-latest
     needs: latest_windows_version
     outputs:
-      exists: ${{ steps.get_image.outputs.exists }}
+      exists: $${{ steps.get_image.outputs.exists }}
     steps:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: $${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Check If Image Exists
         id: get_image
@@ -581,15 +580,15 @@ jobs:
           azcliversion: 2.34.1
           inlineScript: |
             if az image show \
-              --resource-group "${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}" \
-              --name "${IMAGE_SKU}-${{ needs.latest_windows_version.outputs.version }}"; then
+              --resource-group "$${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}" \
+              --name "$${IMAGE_SKU}-$${{ needs.latest_windows_version.outputs.version }}"; then
               image_exists=true
             else
               image_exists=false
             fi
 
-            echo "Image Exists: ${image_exists}"
-            echo "::set-output name=exists::${image_exists}"
+            echo "Image Exists: $${image_exists}"
+            echo "::set-output name=exists::$${image_exists}"
 
   packer:
     name: Run Packer
@@ -614,16 +613,16 @@ jobs:
           arguments: -color=false -on-error=abort
           target: server.pkr.hcl
         env:
-          PKR_VAR_client_id: ${{ secrets.PACKER_CLIENT_ID }}
-          PKR_VAR_client_secret: ${{ secrets.PACKER_CLIENT_SECRET }}
-          PKR_VAR_subscription_id: ${{ secrets.PACKER_SUBSCRIPTION_ID }}
-          PKR_VAR_tenant_id: ${{ secrets.PACKER_TENANT_ID }}
-          PKR_VAR_artifacts_resource_group: ${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}
-          PKR_VAR_build_resource_group: ${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}
-          PKR_VAR_source_image_publisher: ${{ env.IMAGE_PUBLISHER }}
-          PKR_VAR_source_image_offer: ${{ env.IMAGE_OFFER }}
-          PKR_VAR_source_image_sku: ${{ env.IMAGE_SKU }}
-          PKR_VAR_source_image_version: ${{ needs.latest_windows_version.outputs.version }}
+          PKR_VAR_client_id: $${{ secrets.PACKER_CLIENT_ID }}
+          PKR_VAR_client_secret: $${{ secrets.PACKER_CLIENT_SECRET }}
+          PKR_VAR_subscription_id: $${{ secrets.PACKER_SUBSCRIPTION_ID }}
+          PKR_VAR_tenant_id: $${{ secrets.PACKER_TENANT_ID }}
+          PKR_VAR_artifacts_resource_group: $${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}
+          PKR_VAR_build_resource_group: $${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}
+          PKR_VAR_source_image_publisher: $${{ env.IMAGE_PUBLISHER }}
+          PKR_VAR_source_image_offer: $${{ env.IMAGE_OFFER }}
+          PKR_VAR_source_image_sku: $${{ env.IMAGE_SKU }}
+          PKR_VAR_source_image_version: $${{ needs.latest_windows_version.outputs.version }}
 
   cleanup:
     name: Cleanup Packer Resources
@@ -636,7 +635,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: $${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Cleanup Resource Group
         uses: azure/CLI@v1
@@ -645,9 +644,9 @@ jobs:
           inlineScript: |
             az deployment group create \
               --mode Complete \
-              --resource-group "${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}" \
+              --resource-group "$${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}" \
               --template-file cleanup-resource-group.bicep
-)
+EOT
   
   commit_message      = "Create packer_server2022.yml"
   overwrite_on_create = true
@@ -657,7 +656,7 @@ resource "github_repository_file" "packerwin11yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
   file                = ".github/workflows/packer_win11.yml"
-  content             = yamlencode(
+  content             = <<-EOT
 name: Packer Windows 11
 
 on:
@@ -677,12 +676,12 @@ jobs:
     name: Get latest Windows version from Azure
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.get_latest_version.outputs.version }}
+      version: $${{ steps.get_latest_version.outputs.version }}
     steps:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: $${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Get Latest Version
         id: get_latest_version
@@ -690,34 +689,34 @@ jobs:
         with:
           azcliversion: 2.34.1
           inlineScript: |
-            latest_version=$(
+            latest_version=$$(
               az vm image list \
-                --publisher "${IMAGE_PUBLISHER}" \
-                --offer "${IMAGE_OFFER}" \
-                --sku "${IMAGE_SKU}" \
+                --publisher "$${IMAGE_PUBLISHER}" \
+                --offer "$${IMAGE_OFFER}" \
+                --sku "$${IMAGE_SKU}" \
                 --all \
                 --query "[*].version | sort(@)[-1:]" \
                 --out tsv
             )
 
-            echo "Publisher: ${IMAGE_PUBLISHER}"
-            echo "Offer:     ${IMAGE_OFFER}"
-            echo "SKU:       ${IMAGE_SKU}"
-            echo "Version:   ${latest_version}"
+            echo "Publisher: $${IMAGE_PUBLISHER}"
+            echo "Offer:     $${IMAGE_OFFER}"
+            echo "SKU:       $${IMAGE_SKU}"
+            echo "Version:   $${latest_version}"
 
-            echo "::set-output name=version::${latest_version}"
+            echo "::set-output name=version::$${latest_version}"
 
   check_image_exists:
     name: Check if latest version has already been built
     runs-on: ubuntu-latest
     needs: latest_windows_version
     outputs:
-      exists: ${{ steps.get_image.outputs.exists }}
+      exists: $${{ steps.get_image.outputs.exists }}
     steps:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: $${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Check If Image Exists
         id: get_image
@@ -726,15 +725,15 @@ jobs:
           azcliversion: 2.34.1
           inlineScript: |
             if az image show \
-              --resource-group "${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}" \
-              --name "${IMAGE_SKU}-${{ needs.latest_windows_version.outputs.version }}"; then
+              --resource-group "$${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}" \
+              --name "$${IMAGE_SKU}-$${{ needs.latest_windows_version.outputs.version }}"; then
               image_exists=true
             else
               image_exists=false
             fi
 
-            echo "Image Exists: ${image_exists}"
-            echo "::set-output name=exists::${image_exists}"
+            echo "Image Exists: $${image_exists}"
+            echo "::set-output name=exists::$${image_exists}"
 
   packer:
     name: Run Packer
@@ -759,16 +758,16 @@ jobs:
           arguments: -color=false -on-error=abort
           target: windows.pkr.hcl
         env:
-          PKR_VAR_client_id: ${{ secrets.PACKER_CLIENT_ID }}
-          PKR_VAR_client_secret: ${{ secrets.PACKER_CLIENT_SECRET }}
-          PKR_VAR_subscription_id: ${{ secrets.PACKER_SUBSCRIPTION_ID }}
-          PKR_VAR_tenant_id: ${{ secrets.PACKER_TENANT_ID }}
-          PKR_VAR_artifacts_resource_group: ${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}
-          PKR_VAR_build_resource_group: ${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}
-          PKR_VAR_source_image_publisher: ${{ env.IMAGE_PUBLISHER }}
-          PKR_VAR_source_image_offer: ${{ env.IMAGE_OFFER }}
-          PKR_VAR_source_image_sku: ${{ env.IMAGE_SKU }}
-          PKR_VAR_source_image_version: ${{ needs.latest_windows_version.outputs.version }}
+          PKR_VAR_client_id: $${{ secrets.PACKER_CLIENT_ID }}
+          PKR_VAR_client_secret: $${{ secrets.PACKER_CLIENT_SECRET }}
+          PKR_VAR_subscription_id: $${{ secrets.PACKER_SUBSCRIPTION_ID }}
+          PKR_VAR_tenant_id: $${{ secrets.PACKER_TENANT_ID }}
+          PKR_VAR_artifacts_resource_group: $${{ secrets.PACKER_ARTIFACTS_RESOURCE_GROUP }}
+          PKR_VAR_build_resource_group: $${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}
+          PKR_VAR_source_image_publisher: $${{ env.IMAGE_PUBLISHER }}
+          PKR_VAR_source_image_offer: $${{ env.IMAGE_OFFER }}
+          PKR_VAR_source_image_sku: $${{ env.IMAGE_SKU }}
+          PKR_VAR_source_image_version: $${{ needs.latest_windows_version.outputs.version }}
 
   cleanup:
     name: Cleanup Packer Resources
@@ -781,7 +780,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: $${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Cleanup Resource Group
         uses: azure/CLI@v1
@@ -790,9 +789,9 @@ jobs:
           inlineScript: |
             az deployment group create \
               --mode Complete \
-              --resource-group "${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}" \
+              --resource-group "$${{ secrets.PACKER_BUILD_RESOURCE_GROUP }}" \
               --template-file cleanup-resource-group.bicep
-)
+EOT
   
   commit_message      = "Create packer_win11.yml"
   overwrite_on_create = true
