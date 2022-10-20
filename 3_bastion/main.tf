@@ -2,12 +2,12 @@
 # Import first the data because we use 3 github workflow actions with different terrafrom cloud workspaces
 # Import Data from the AADDS
   
-data "azurerm_virtual_network" "aadds-vnet" {
+data "azurerm_virtual_network" "aadds-vnet-id" {
   name                = "azurerm_virtual_network.aadds-vnet.id"
   resource_group_name = "n4k-we-aadds"
 }
   
-data "azurerm_virtual_network" "aadds-vnet" {
+data "azurerm_virtual_network" "aadds-vnet-name" {
   name                = "azurerm_virtual_network.aadds-vnet.name"
   resource_group_name = "n4k-we-aadds"
 }
@@ -117,7 +117,7 @@ resource "azurerm_virtual_network_peering" "wvd-to-aadds" {
   name                         = var.vnet-peering-wvd-to-aadds
   resource_group_name          = var.rg-wvd
   virtual_network_name         = azurerm_virtual_network.wvd.name
-  remote_virtual_network_id    = data.azurerm_virtual_network.aadds-vnet.id
+  remote_virtual_network_id    = data.azurerm_virtual_network.aadds-vnet-id.id
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
   use_remote_gateways          = false
@@ -126,7 +126,7 @@ resource "azurerm_virtual_network_peering" "wvd-to-aadds" {
 resource "azurerm_virtual_network_peering" "aadds-to-wvd" {
   name                         = var.vnet-peering-aadds-to-wvd
   resource_group_name          = var.rg
-  virtual_network_name         = data.azurerm_virtual_network.aadds-vnet.name
+  virtual_network_name         = data.azurerm_virtual_network.aadds-vnet-name.name
   remote_virtual_network_id    = azurerm_virtual_network.wvd.id
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
