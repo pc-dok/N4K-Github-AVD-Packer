@@ -1,3 +1,10 @@
+# Terraform Cloud Variables - Please ensure RBAC Contributer Settings in this Variables
+
+variable "ARM_CLIENT_ID" {}
+variable "ARM_CLIENT_SECRET" {}
+variable "ARM_TENANT_ID" {}
+variable "ARM_SUBSCRIPTION" {}
+
 # Tags 
 variable "taginfo" {
   type        = string
