@@ -3,7 +3,7 @@ terraform {
     organization = "N4K"
 
     workspaces {
-      name = "N4K-Github-AVD-Packer"
+      name = "1_Github-AVD-Packer"
     }
   }
   
@@ -23,7 +23,13 @@ provider "azurerm" {
   features {}
 }
 
+#provider "github" {
+#  token = "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"
+#  owner = "pc-dok"
+#}
+
 provider "github" {
-  token = "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"
-  owner = "pc-dok"
+  token = var.GITHUB_SECRET
+  owner = var.GITHUB_OWNER
 }
+
