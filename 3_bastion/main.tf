@@ -7,10 +7,14 @@ data "azurerm_image" "win2022" {
 }
   
 # Import Data from the AADDS
-  
 data "azurerm_virtual_network" "vnet-we-aadds" {
   name                = "vnet-we-aadds"
   resource_group_name = "n4k-we-aadds"
+}
+
+# Import User from the Azure Directory  
+data "azuread_user" "info" {
+  user_principal_name = "info@network4kmu.at"
 }
 
 # Create the RG
@@ -191,7 +195,7 @@ resource "azurerm_key_vault_access_policy" "ad_group_policy" {
 
   tenant_id = data.azurerm_client_config.current.tenant_id
   object_id = data.azuread_user.info.object_id
-  
+    
   key_permissions = [
       "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey",
     ]
