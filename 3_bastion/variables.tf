@@ -7,6 +7,12 @@ variable "ARM_SUBSCRIPTION" {}
 variable "GITHUB_SECRET" {}
 variable "GITHUB_OWNER" {}
 
+# My Azure Admin User for administrate than Keyvault
+variable "aduser-info" {
+  type        = string
+  default     = "info@network4kmu.at"
+}
+
 # Tags 
 variable "taginfo" {
   type        = string

@@ -14,7 +14,7 @@ data "azurerm_virtual_network" "vnet-we-aadds" {
 
 # Import User from the Azure Directory  
 data "azuread_user" "info" {
-  user_principal_name = "info@network4kmu.at"
+  user_principal_name = var.aduser-info
 }
 
 # Create the RG
