@@ -15,7 +15,7 @@ jobs:
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
-        working-directory: "./1_packer/"
+        working-directory: "./3_bastion/"
         shell: bash
   
     steps:
