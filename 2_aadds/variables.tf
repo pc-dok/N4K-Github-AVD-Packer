@@ -4,6 +4,8 @@ variable "ARM_CLIENT_ID" {}
 variable "ARM_CLIENT_SECRET" {}
 variable "ARM_TENANT_ID" {}
 variable "ARM_SUBSCRIPTION" {}
+variable "GITHUB_SECRET" {}
+variable "GITHUB_OWNER" {}
 
 # Tags 
 variable "taginfo" {
