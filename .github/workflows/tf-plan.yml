@@ -40,5 +40,5 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false
       with:
-       path: ./1_packer/
+       path: 1_packer
       
