@@ -1,4 +1,4 @@
-name: 'Create Packer ENV'
+name: '1_Create_Packer_ENV'
 
 on:
   push:
