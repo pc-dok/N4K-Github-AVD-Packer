@@ -297,7 +297,7 @@ resource "azurerm_network_interface" "jh" {
 
 # Import Data from the Packer Image
 data "azurerm_image" "win2022" {
-  name                = "2022-datacenter-20348.887.220806"
+  name                = "2022-datacenter-azure-edition-smalldisk-20348.887.220806"
   resource_group_name = "n4k-we-packer-avd-images"
 }
 
