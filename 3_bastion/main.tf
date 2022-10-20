@@ -8,9 +8,12 @@ data "azurerm_image" "win2022" {
   
 # Import Data from the AADDS
   
+         "name": "vnet-we-aadds",
+            "resource_group_name": "n4k-we-aadds",
+  
 data "azurerm_virtual_network" "vnet-we-aadds" {
-  id                  = "azurerm_virtual_network.vnet-we-aadds.id"
-  name                = "azurerm_virtual_network.vnet-we-aadds.name"
+  id                  = "azurerm_virtual_network.vnet-we-aadds"
+  name                = "azurerm_virtual_network.vnet-we-aadds"
   resource_group_name = "n4k-we-aadds"
 }
 
