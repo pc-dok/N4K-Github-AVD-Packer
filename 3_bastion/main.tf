@@ -11,7 +11,7 @@ data "azurerm_virtual_network" "aadds-vnet-name" {
   name                = "azurerm_virtual_network.aadds-vnet.name"
   resource_group_name = "n4k-we-aadds"
 }
-
+  
 resource "azurerm_resource_group" "wvd" {
   name     = var.rg-wvd
   location = var.location
@@ -324,7 +324,6 @@ resource "azurerm_windows_virtual_machine" "jh" {
   admin_password        = azurerm_key_vault_secret.localadminjh.value
   network_interface_ids = [azurerm_network_interface.jh.id]
   depends_on            = [ azurerm_virtual_network.wvd,
-                            azurerm_active_directory_domain_service.aadds,
                             azurerm_key_vault.kv1
                             ]
   tags = {
