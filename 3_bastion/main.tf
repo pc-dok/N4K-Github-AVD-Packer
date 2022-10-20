@@ -311,9 +311,9 @@ resource "azurerm_windows_virtual_machine" "jh" {
   name                = var.jh_name
   location            = var.location
   resource_group_name = azurerm_resource_group.wvd.name
-  eviction_policy                 = "Deallocate"
-  priority                        = "Spot"
-  max_bid_price                   = 0.5
+  #eviction_policy                 = "Deallocate"
+  #priority                        = "Spot"
+  #max_bid_price                   = 0.5
   size                  = var.vmsize
   admin_username        = var.jh_local_user
   admin_password        = azurerm_key_vault_secret.localadminjh.value
