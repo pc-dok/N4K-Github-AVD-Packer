@@ -235,7 +235,7 @@ variable "jh_osdisk" {
 
 variable "vmsize" {
   type        = string
-  default     = "Standard_F2"
+  default     = "Standard_D4s_v4"
   description = "VM Size"
 }
 
