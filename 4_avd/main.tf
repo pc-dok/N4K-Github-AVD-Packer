@@ -12,7 +12,7 @@ data "azurerm_key_vault" "kv" {
 
 data "azurerm_key_vault_secret" "localadmin" {
   name                = "localadminjh"
-  key_vault_id        = data.azurerm_key_vault.kv
+  key_vault_id        = data.azurerm_key_vault.kv.id
 }
 
 data "azurerm_subnet" "wvd" {
@@ -223,7 +223,7 @@ resource "random_password" "avduser" {
 resource "azurerm_key_vault_secret" "avduser" {
   name          = var.avduser
   value         = random_password.avduser.result
-  key_vault_id  = data.azurerm_key_vault.kv1.id
+  key_vault_id  = data.azurerm_key_vault.kv.id
 }
 
 # Create 2 AVD Testusers in AADDS
