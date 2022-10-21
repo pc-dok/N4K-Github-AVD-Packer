@@ -116,7 +116,7 @@ resource "azurerm_windows_virtual_machine" "avd" {
   size                  = var.vmsizeavd
   license_type          = "Windows_Client" # https://docs.microsoft.com/en-us/azure/virtual-machines/windows/windows-desktop-multitenant-hosting-deployment#verify-your-vm-is-utilizing-the-licensing-benefit
   admin_username        = var.jh_local_user
-  admin_password        = azurerm_key_vault_secret.localadminjh.value
+  admin_password        = data.azurerm_key_vault_secret.localadmin.value
   network_interface_ids = [azurerm_network_interface.avd[count.index].id]
 
   os_disk {
