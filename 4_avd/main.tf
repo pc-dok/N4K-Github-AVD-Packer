@@ -1,4 +1,9 @@
 // NOTE: Create the HostPool and Sessionhost for WVD
+# Import Data from the Bastion
+data "azurerm_resource_group" "wvd" {
+  name                = var.rg-wvd
+  resource_group_name = var.rg-wvd
+}
 
 # Host Pool
 resource "azurerm_virtual_desktop_host_pool" "avd" {
