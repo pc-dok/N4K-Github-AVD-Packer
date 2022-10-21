@@ -26,7 +26,7 @@ data "azurerm_virtual_network" "wvd" {
 }
 
 data "azurerm_subnet" "wvd" {
-  name                  = var.vnet-wvd
+  name                  = "wvd"
   virtual_network_name  = data.azurerm_virtual_network.wvd.name
   resource_group_name   = var.rg-wvd
 }
