@@ -4,14 +4,19 @@
 data "azurerm_resource_group" "wvd" {
   name  = var.rg-wvd
 }
-#
+
 data "azurerm_key_vault" "kv" {
   name                = var.kv1
   resource_group_name = var.rg-wvd
 }
 
 data "azurerm_key_vault_secret" "localadmin" {
-  name                = "localadminjh"
+  name                = var.localadminjh
+  key_vault_id        = data.azurerm_key_vault.kv.id
+}
+
+data "azurerm_key_vault_secret" "domainjoin" {
+  name                = var.domainjoin_secret
   key_vault_id        = data.azurerm_key_vault.kv.id
 }
 
@@ -21,6 +26,11 @@ data "azurerm_subnet" "wvd" {
   resource_group_name   = var.rg-wvd
 }
 
+data "azurerm_virtual_network_peering" "wvd-to-aadds" {
+  name                  = var.vnet-peering-wvd-to-aadds
+  virtual_network_name  = "wvd"
+  resource_group_name   = var.rg-wvd
+}
 
 # Host Pool
 resource "azurerm_virtual_desktop_host_pool" "avd" {
@@ -157,7 +167,7 @@ resource "azurerm_virtual_machine_extension" "avd_aadds_join" {
 
   protected_settings = <<-PROTECTED_SETTINGS
     {
-      "Password": "${azurerm_key_vault_secret.domainjoin.value}"
+      "Password": "${data.azurerm_key_vault_secret.domainjoin.value}"
     }
     PROTECTED_SETTINGS
 
