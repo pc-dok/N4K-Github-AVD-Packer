@@ -28,6 +28,13 @@ User Administrator
 ## 1.Create Packer Environment
 First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
 
+```sh
+- We will create a Github Repo, add there the Secrets what is needed for Azure
+- Than we parsing our files what we are needing to create packer images
+- Last step is creating the workflow files
+- Now you will see unter Actions - a Packer 11 and a Packer 2022 Workflow - Let it run!
+```
+
 - Create a Github Repo
 - Create the needed files
 - ✨Magic: Github Workflow fully created - let it run ✨
