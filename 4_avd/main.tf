@@ -12,7 +12,7 @@ data "azurerm_key_vault" "kv" {
 
 data "azurerm_key_vault_secret" "localadmin" {
   name                = "localadminjh"
-  resource_group_name = var.rg-wvd
+  key_vault_id        = data.azurerm_key_vault.kv1
 }
 
 data "azurerm_subnet" "wvd" {
