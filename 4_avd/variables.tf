@@ -117,6 +117,12 @@ variable "location" {
   description = "The location from Azure Ressource"
 }
 
+variable "kv1" {
+  type        = string
+  default     = "n4kwekv1fortheazwvdenv"
+  description = "The KeyVault Name"
+}
+
 variable "vnet-aadds" {
   type        = string
   default     = "vnet-we-aadds"
