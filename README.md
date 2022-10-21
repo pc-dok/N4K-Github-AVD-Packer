@@ -5,7 +5,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-# N4K-Github-AVD-Packer
+## N4K-Github-AVD-Packer
 Create Azure AVD with a AADDS and Packer Images
 
 On Azure create first a new Contributor Role
@@ -25,7 +25,8 @@ Cloud Application Administrator \
 Network Contributor \
 User Administrator 
 
-// # First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
+## 1.Create Packer Environment \
+First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
 
 - Create a Github Repo
 - Create the needed files
