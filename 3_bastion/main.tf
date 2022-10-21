@@ -144,16 +144,16 @@ resource "azurerm_virtual_network_peering" "aadds-to-wvd" {
 # Create a KeyVault in Azure on my WVD RG
 
 # Create KeyVault ID
-resource "random_id" "kvname" {
-  byte_length = 5
-  prefix = var.kvprefix
-}
+#resource "random_id" "kvname" {
+#  byte_length = 5
+#  prefix = var.kvprefix
+#}
 
 # Keyvault Creation
 data "azurerm_client_config" "current" {}
 resource "azurerm_key_vault" "kv1" {
   depends_on                      = [azurerm_resource_group.wvd]
-  name                            = random_id.kvname.hex
+  name                            = var.kv1
   location                        = var.location
   resource_group_name             = var.rg-wvd
   enabled_for_disk_encryption     = true
