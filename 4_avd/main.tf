@@ -6,7 +6,8 @@ data "azurerm_resource_group" "wvd" {
 }
 
 data "azurerm_key_vault" "kv" {
-  name  = "kv1"
+  name                = "kv1"
+  resource_group_name = var.rg-wvd
 }
 
 # Host Pool
