@@ -38,7 +38,7 @@ User Administrator
 ```
 
 
-## 1.Create Packer Environment
+## 1. Create Packer Environment
 First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
 
 ```sh
@@ -52,9 +52,6 @@ First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 
 - Create the needed files
 - ✨Magic: Github Workflow fully created - let it run ✨
 
-## Features
-
-As [John Gruber] writes on the [Markdown site][df1]
 
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable
