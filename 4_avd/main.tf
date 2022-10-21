@@ -11,6 +11,7 @@ data "azurerm_key_vault" "kv" {
 }
 
 data "azurerm_subnet" "wvd" {
+  name                  = "wvd"
   virtual_network_name  = "wvd"
   resource_group_name   = var.rg-wvd
 }
