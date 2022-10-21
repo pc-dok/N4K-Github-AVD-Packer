@@ -56,9 +56,8 @@ First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 
 > On the end you should have 2 Images in your Azure Ressource Group. 
 > That Images we take later for our Jumping Host, and for the Windows 11 AVD!
 
-## Tech
-
-Dillinger uses a number of open source projects to work properly:
+## 2. Create the Azure Active Domain Directory Service
+We create a AADDS - because i have no onprem AD. And for joining Computers you need an AD :)
 
 - [AngularJS] - HTML enhanced for web apps!
 - [Ace Editor] - awesome web-based text editor
