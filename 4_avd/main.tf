@@ -20,15 +20,15 @@ data "azurerm_key_vault_secret" "domainjoin" {
   key_vault_id        = data.azurerm_key_vault.kv.id
 }
 
-data "azurerm_subnet" "wvd" {
-  name                  = "wvd"
-  virtual_network_name  = "wvd"
-  resource_group_name   = var.rg-wvd
-}
-
 data "azurerm_virtual_network" "wvd" {
   name                = var.vnet-wvd
   resource_group_name = var.rg-wvd
+}
+
+data "azurerm_subnet" "wvd" {
+  name                  = var.vnet-wvd
+  virtual_network_name  = data.azurerm_virtual_network.wvd.name
+  resource_group_name   = var.rg-wvd
 }
 
 data "azurerm_virtual_network" "vnet-we-aadds" {
