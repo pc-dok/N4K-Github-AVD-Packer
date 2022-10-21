@@ -396,7 +396,7 @@ variable "joinuser" {
 variable "avd_host_pool_size" {
   type        = number
   description = "Number of session hosts to add to the AVD host pool."
-  default     = "2"
+  default     = "1"
 }
 
 variable "avd_register_session_host_dsc_modules_url" {

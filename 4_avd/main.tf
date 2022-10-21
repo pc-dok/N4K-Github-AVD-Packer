@@ -38,7 +38,7 @@ data "azurerm_virtual_network" "vnet-we-aadds" {
 
 // NOTE: Create the peering between vnet main to vnet aadds in Azure West Europe
 
-resource "azurerm_virtual_network_peering" "wvd-to-aadds" {
+resource "azurerm_virtual_network_peering" "wvd-to-aadds-1" {
   name                         = var.vnet-peering-wvd-to-aadds
   resource_group_name          = var.rg-wvd
   virtual_network_name         = data.azurerm_virtual_network.wvd.name
@@ -48,7 +48,7 @@ resource "azurerm_virtual_network_peering" "wvd-to-aadds" {
   use_remote_gateways          = false
 }
 
-resource "azurerm_virtual_network_peering" "aadds-to-wvd" {
+resource "azurerm_virtual_network_peering" "aadds-to-wvd-1" {
   name                         = var.vnet-peering-aadds-to-wvd
   resource_group_name          = var.rg
   virtual_network_name         = data.azurerm_virtual_network.vnet-we-aadds.name
