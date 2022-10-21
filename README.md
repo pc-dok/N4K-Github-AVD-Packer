@@ -16,6 +16,6 @@ Domain Service Contributor \
 User Access Administrator \
 Cloud Application Administrator \
 Network Contributor \
-User Administrator \
+User Administrator 
 
 // # First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
