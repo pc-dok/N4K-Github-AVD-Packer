@@ -27,7 +27,7 @@ Roles and Assignments for the azure-cli service principal:
 ```sh
 - Because of higher security we want not save the tfstate files in our repo, so i take terraform workspaces
 - You must create in your terraform cloud first for every step 4 different workspaces (up2you)
-- Important: It must be a API Workflow
+- Important: It must be a API driven workflow
 - every workspace must have the Azure credentials from your created rbac account stored
 - also you need in your github - settings - a personal access token generated - this is the github secret
 -- GITHUB_OWNER	
