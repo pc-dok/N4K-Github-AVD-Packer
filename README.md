@@ -23,7 +23,21 @@ Domain Service Contributor \
 User Access Administrator \
 Cloud Application Administrator \
 Network Contributor \
-User Administrator 
+User Administrator
+
+```sh
+- Because of higher security we want not save the tfstate files in our repo, so i take terraform workspaces
+- You must create in your terraform cloud first for every step 4 different workspaces (up2you)
+- every workspace must have the Azure credentials from your created rbac account stored
+- also you need in your github - settings - a personal access token generated - this is the github secret
+-- GITHUB_OWNER	
+-- GITHUB_SECRET
+-- ARM_TENANT_ID
+-- ARM_SUBSCRIPTION
+-- ARM_CLIENT_ID	
+-- ARM_CLIENT_SECRET
+```
+
 
 ## 1.Create Packer Environment
 First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
