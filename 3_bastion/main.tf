@@ -1,6 +1,6 @@
 // NOTE: Create the Ressource Groups in Azure West Europe for the Azure Virtual Desktop Service
 # Import first the data because we use 3 github workflow actions with different terrafrom cloud workspaces
-# Import Data from the Packer Image
+# Import Data from the Packer Image for WVD
 data "azurerm_image" "win2022" {
   name                = "2022-datacenter-azure-edition-smalldisk-20348.887.220806"
   resource_group_name = "n4k-we-packer-avd-images"
