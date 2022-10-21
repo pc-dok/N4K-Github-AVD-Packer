@@ -16,12 +16,12 @@ to give this CLI all the needed Roles
 Subscriptions - IAM - there you see all roles, and you can create a assignment
 Roles and Assignments for the azure-cli service principal:
 
-> - Contributor \
-> - Application Administrator Role \
-> - Domain Service Contributor \
-> - User Access Administrator \
-> - Cloud Application Administrator \
-> - Network Contributor \
+> - Contributor
+> - Application Administrator Role
+> - Domain Service Contributor
+> - User Access Administrator
+> - Cloud Application Administrator
+> - Network Contributor
 > - User Administrator
 
 ```sh
