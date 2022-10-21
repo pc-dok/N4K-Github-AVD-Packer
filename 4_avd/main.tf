@@ -2,7 +2,6 @@
 # Import Data from the Bastion
 data "azurerm_resource_group" "wvd" {
   name                = var.rg-wvd
-  resource_group_name = var.rg-wvd
 }
 
 # Host Pool
