@@ -25,7 +25,7 @@ Cloud Application Administrator \
 Network Contributor \
 User Administrator 
 
-## 1.Create Packer Environment \
+## 1.Create Packer Environment
 First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 11
 
 - Create a Github Repo
