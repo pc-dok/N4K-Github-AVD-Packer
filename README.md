@@ -16,13 +16,13 @@ to give this CLI all the needed Roles
 Subscriptions - IAM - there you see all roles, and you can create a assignment
 Roles and Assignments for the azure-cli service principal:
 
-Contributor \
-Application Administrator Role \
-Domain Service Contributor \
-User Access Administrator \
-Cloud Application Administrator \
-Network Contributor \
-User Administrator
+> - Contributor \
+> - Application Administrator Role \
+> - Domain Service Contributor \
+> - User Access Administrator \
+> - Cloud Application Administrator \
+> - Network Contributor \
+> - User Administrator
 
 ```sh
 - Because of higher security we want not save the tfstate files in our repo, so i take terraform workspaces
