@@ -151,6 +151,7 @@ resource "github_repository_file" "installposhaz" {
   branch              = "main"
   file                = "install-azure-powershell.ps1"
   content             = <<-EOT
+# Install Azure CLI and RSAT Tools
 $ErrorActionPreference = "Stop"
 
 $downloadUrl = "https://github.com/Azure/azure-powershell/releases/download/v7.3.2-March2022/Az-Cmdlets-7.3.2.35305-x64.msi"
@@ -178,6 +179,7 @@ Write-Host "Disable Server Manager on Logon"
 Get-ScheduledTask -TaskName ServerManager | Disable-ScheduledTask -Verbose
 
 Write-Host "All done!"
+# End
 EOT
   
   commit_message      = "Create install-azure-powershell.ps1"
