@@ -5,6 +5,10 @@ data "azurerm_resource_group" "wvd" {
   name  = var.rg-wvd
 }
 
+data "random_id" "kvname" {
+  name = "kvname"
+}
+
 data "azurerm_key_vault" "kv" {
   name                = random_id.kvname.hex
   resource_group_name = var.rg-wvd
