@@ -4,7 +4,7 @@
 data "azurerm_resource_group" "wvd" {
   name  = var.rg-wvd
 }
-
+#
 data "azurerm_key_vault" "kv" {
   name                = var.kv1
   resource_group_name = var.rg-wvd
