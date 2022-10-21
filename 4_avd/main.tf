@@ -6,7 +6,7 @@ data "azurerm_resource_group" "wvd" {
 }
 
 data "azurerm_key_vault" "kv" {
-  name  = random_id.kvname.hex
+  name  = "kv1"
 }
 
 # Host Pool
