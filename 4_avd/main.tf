@@ -84,7 +84,7 @@ resource "azurerm_network_interface" "avd" {
 
   ip_configuration {
     name                          = "avd-ipconf"
-    subnet_id                     = azurerm_subnet.wvd.id
+    subnet_id                     = data.azurerm_subnet.wvd.id
     private_ip_address_allocation = "Dynamic"
   }
 }
