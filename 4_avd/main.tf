@@ -174,11 +174,6 @@ resource "azurerm_virtual_machine_extension" "avd_aadds_join" {
   lifecycle {
     ignore_changes = [settings, protected_settings]
   }
-
-  depends_on = [
-    azurerm_virtual_network_peering.wvd-to-aadds,
-    azurerm_virtual_network_peering.aadds-to-wvd
-  ]
 }
 
 # Register to Host Pool
