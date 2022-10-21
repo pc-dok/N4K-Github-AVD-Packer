@@ -1,14 +1,19 @@
 // NOTE: Create the HostPool and Sessionhost for WVD
 # Import Data from the Bastion
+
 data "azurerm_resource_group" "wvd" {
-  name                = var.rg-wvd
+  name  = var.rg-wvd
+}
+
+data "azurerm_key_vault" "kv" {
+  name  = random_id.kvname.hex
 }
 
 # Host Pool
 resource "azurerm_virtual_desktop_host_pool" "avd" {
   name                = "avd-vdpool"
   location            = var.location
-  resource_group_name = azurerm_resource_group.wvd.name
+  resource_group_name = data.azurerm_resource_group.wvd.name
   type               = "Pooled"
   load_balancer_type = "BreadthFirst"
   friendly_name      = "AVD Host Pool using AADDS"
@@ -33,7 +38,7 @@ resource "azurerm_virtual_desktop_host_pool_registration_info" "avd" {
 resource "azurerm_virtual_desktop_workspace" "avd" {
   name                = "avd-vdws"
   location            = var.location
-  resource_group_name = azurerm_resource_group.wvd.name
+  resource_group_name = data.azurerm_resource_group.wvd.name
   tags = {
     "1_Info"  = var.taginfo
     "2_Type"  = var.tagtypeworkspace
@@ -43,7 +48,7 @@ resource "azurerm_virtual_desktop_workspace" "avd" {
 resource "azurerm_virtual_desktop_application_group" "avd" {
   name                = "desktop-vdag"
   location            = var.location
-  resource_group_name = azurerm_resource_group.wvd.name
+  resource_group_name = data.azurerm_resource_group.wvd.name
   tags = {
     "1_Info"  = var.taginfo
     "2_Type"  = var.tagtypevdag
@@ -62,8 +67,8 @@ resource "azurerm_virtual_desktop_workspace_application_group_association" "avd"
 resource "azurerm_network_interface" "avd" {
   count               = var.avd_host_pool_size
   name                = "avd-nic-${count.index}"
-  location            = azurerm_resource_group.wvd.location
-  resource_group_name = azurerm_resource_group.wvd.name
+  location            = data.azurerm_resource_group.wvd.location
+  resource_group_name = data.azurerm_resource_group.wvd.name
   tags = {
     "1_Info"  = var.taginfo
     "2_Type"  = var.tagtypenicavd
@@ -79,14 +84,14 @@ resource "azurerm_network_interface" "avd" {
 # Import Data from the Packer Image
 data "azurerm_image" "win11" {
   name                = "win11-22h2-avd-22621.674.221008"
-  resource_group_name = "n4k-we-packer-images"
+  resource_group_name = "n4k-we-packer-avd-images"
 }
 
 resource "azurerm_windows_virtual_machine" "avd" {
   count               = var.avd_host_pool_size
   name                = "avd-vm-${count.index}" #-${random_id.avd[count.index].hex}
-  location            = azurerm_resource_group.wvd.location
-  resource_group_name = azurerm_resource_group.wvd.name
+  location            = data.azurerm_resource_group.wvd.location
+  resource_group_name = data.azurerm_resource_group.wvd.name
   #eviction_policy     = "Deallocate"
   #priority            = "Spot"
   #max_bid_price       = 0.5
@@ -205,8 +210,7 @@ resource "random_password" "avduser" {
 resource "azurerm_key_vault_secret" "avduser" {
   name          = var.avduser
   value         = random_password.avduser.result
-  key_vault_id  = azurerm_key_vault.kv1.id
-  depends_on    = [ azurerm_key_vault.kv1 ]
+  key_vault_id  = data.azurerm_key_vault.kv1.id
 }
 
 # Create 2 AVD Testusers in AADDS
