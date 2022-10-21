@@ -10,6 +10,12 @@ data "azurerm_key_vault" "kv" {
   resource_group_name = var.rg-wvd
 }
 
+data "azurerm_subnet" "wvd" {
+  name                = "wvd"
+  resource_group_name = var.rg-wvd
+}
+
+
 # Host Pool
 resource "azurerm_virtual_desktop_host_pool" "avd" {
   name                = "avd-vdpool"
@@ -216,14 +222,12 @@ resource "azurerm_key_vault_secret" "avduser" {
 
 # Create 2 AVD Testusers in AADDS
 resource "azuread_user" "avduser1" {
-  depends_on          = [azurerm_key_vault.kv1]
   user_principal_name = var.avduser1
   display_name        = "AVD Test User 1"
   password            = azurerm_key_vault_secret.avduser.value
 }
 
 resource "azuread_user" "avduser2" {
-  depends_on          = [azurerm_key_vault.kv1]
   user_principal_name = var.avduser2
   display_name        = "AVD Test User 2"
   password            = azurerm_key_vault_secret.avduser.value
