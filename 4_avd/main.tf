@@ -5,18 +5,14 @@ data "azurerm_resource_group" "wvd" {
   name  = var.rg-wvd
 }
 
-data "random_id" "kvname" {
-  name = "kvname"
-}
-
 data "azurerm_key_vault" "kv" {
-  name                = random_id.kvname.hex
+  name                = var.kv1
   resource_group_name = var.rg-wvd
 }
 
 data "azurerm_key_vault_secret" "localadmin" {
   name                = "localadminjh"
-  key_vault_id        = data.azurerm_key_vault.kv1
+  key_vault_id        = data.azurerm_key_vault.kv
 }
 
 data "azurerm_subnet" "wvd" {
