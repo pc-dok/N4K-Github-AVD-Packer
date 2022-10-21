@@ -53,13 +53,8 @@ First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 
 - ✨Magic: Github Workflow fully created - let it run ✨
 
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+> On the end you should have 2 Images in your Azure Ressource Group. 
+> That Images we take later for our Jumping Host, and for the Windows 11 AVD!
 
 ## Tech
 
