@@ -69,7 +69,20 @@ In this Step we create the Azure Virtual Deskopts - AVD! In that step i also tak
 
 I can than logon with my avduser1 account for demo. please adapt it in your way!
 
-## 5. Your Environment on the End
+## 5. My Github Actions in this Repo
+
+| Steps   | Info   |
+| ------- | ------ |
+| 1_Create_Packer ENV | Create Github Repo for creating Packer Images |
+| 2_Create_AADDS | Creates Azure Active Directory Service |
+| 3_Create_Bastion | Creates Azure Bastion Service with one Jumphost |
+| 4_Create_AVD | Create the Azure Virtual Desktop |
+| Destroy_AADS | Destroy our previous build AADDS in Azure |
+| Destroy_AVD | Destroy our previous build AVD in Azure |
+| Destroy_Bastion | Destroy our previous build Bastion in Azure |
+| Destroy_Packer | Destroy our previous build Packer Images and Repo in Azure and Github |
+
+## 6. Your Environment on the End
 
 | Steps   | Info   |
 | ------- | ------ |
@@ -77,4 +90,4 @@ I can than logon with my avduser1 account for demo. please adapt it in your way!
 | AADDS   | Creates Azure Active Directory Service          |
 | Bastion | Creates Azure Bastion Service with one Jumphost |
 | AVD     | Create the Azure Virtual Desktop                |
-| ------- | ------ |
+
