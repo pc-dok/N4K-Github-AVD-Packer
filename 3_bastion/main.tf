@@ -4,9 +4,8 @@
 data "azurerm_image" "win2022" {
   #name                = azurerm_image.win2022.name
   resource_group_name = var.artifacts
-  name   = [ "2022-*" ]
+  name_regex   = "2022-*"
 }
-
   
 # Import Data from the AADDS
 data "azurerm_virtual_network" "vnet-we-aadds" {
