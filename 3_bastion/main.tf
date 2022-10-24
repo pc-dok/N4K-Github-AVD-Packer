@@ -2,9 +2,14 @@
 # Import first the data because we use 3 github workflow actions with different terrafrom cloud workspaces
 # Import Data from the Packer Image for WVD
 data "azurerm_image" "win2022" {
-  name                = azurerm_image.win2022.name
+  #name                = azurerm_image.win2022.name
   resource_group_name = var.artifacts
+  filter {
+    name   = "name"
+    values = ["2022-*"]
+  }
 }
+
   
 # Import Data from the AADDS
 data "azurerm_virtual_network" "vnet-we-aadds" {
