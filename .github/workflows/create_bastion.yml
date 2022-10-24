@@ -37,7 +37,7 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false
       
-    # Apply the plan and push it
+    # Apply the plan and push it 1
     - name: Terraform Apply
       run: terraform apply -auto-approve -input=false
       
