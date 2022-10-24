@@ -4,10 +4,7 @@
 data "azurerm_image" "win2022" {
   #name                = azurerm_image.win2022.name
   resource_group_name = var.artifacts
-  filter {
-    name   = "name"
-    values = ["2022-*"]
-  }
+  name   = [ 2022-* ]
 }
 
   
