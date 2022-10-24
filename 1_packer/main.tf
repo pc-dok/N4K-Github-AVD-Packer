@@ -333,6 +333,7 @@ resource "github_repository_file" "win11pkrhcl" {
   branch              = "main"
   file                = "windows.pkr.hcl"
   content             = <<-EOT
+  
 # Windows 11  
 variable "client_id" {
   type        = string
