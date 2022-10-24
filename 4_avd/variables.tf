@@ -117,6 +117,12 @@ variable "location" {
   description = "The location from Azure Ressource"
 }
 
+variable "artifacts" {
+  type        = string
+  default     = "n4k-we-packer-avd-images"
+  description = "The location from Azure Ressource"
+}
+
 variable "kv1" {
   type        = string
   default     = "n4kwekv1fortheazwvdenv"
