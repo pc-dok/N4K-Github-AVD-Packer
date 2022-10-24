@@ -1,7 +1,7 @@
 // NOTE: Create the HostPool and Sessionhost for WVD
 # Import Data from the Packer Image
 data "azurerm_image" "win11" {
-  name                = azurerm_image.win11.name
+  name_regex   = "win11-*"
   resource_group_name = var.artifacts
 }
   
