@@ -1,6 +1,11 @@
 // NOTE: Create the HostPool and Sessionhost for WVD
+# Import Data from the Packer Image
+data "azurerm_image" "win11" {
+  name                = azurerm_image.win11.name
+  resource_group_name = var.artifacts
+}
+  
 # Import Data from the Bastion
-
 data "azurerm_resource_group" "wvd" {
   name  = var.rg-wvd
 }
@@ -106,12 +111,6 @@ resource "azurerm_network_interface" "avd" {
     subnet_id                     = data.azurerm_subnet.wvd.id
     private_ip_address_allocation = "Dynamic"
   }
-}
-
-# Import Data from the Packer Image
-data "azurerm_image" "win11" {
-  name                = "win11-22h2-avd-22621.674.221008"
-  resource_group_name = "n4k-we-packer-avd-images"
 }
 
 resource "azurerm_windows_virtual_machine" "avd" {
