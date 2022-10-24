@@ -57,43 +57,24 @@ First - Create Images for the Jumpinghost and the AVD - Server 2022 and Windows 
 > That Images we take later for our Jumping Host, and for the Windows 11 AVD!
 
 ## 2. Create the Azure Active Domain Directory Service
-We create a AADDS - because i have no onprem AD. And for joining Computers you need an AD :)
+We create a AADDS - because i have no onprem AD. And for joining Computers you need an AD :). No more informations need here. code says more!
 
-- [AngularJS] - HTML enhanced for web apps!
-- [Ace Editor] - awesome web-based text editor
+## 3. Create the Azure Bastion and Jumping Host
+After we have create the AADDS i want know if AD is working as expected. For that i create a Jumping Host with Windows Server 2022 (RSAT Tools for AD installed) and join it to the Domain. When this is working i am sure the AVD in Step 4 will than also work for me. For testing i open then the AD Tools, to look if i see my Server in the Computers OU from AADDS!
 
+## 4. Create the Azure Virtual Desktop
+In this Step we create the Azure Virtual Deskopts - AVD! In that step i also take the packer Image what we create in Step 1. It is only for Demo so no more info needed here. When you want try to logon you do that over the 
 
+- https://client.wvd.microsoft.com/arm/webclient/index.html
 
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
+I can than logon with my avduser1 account for demo. please adapt it in your way!
 
+## 5. Your Environment on the End
 
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
-
+| Steps   | Info   |
+| ------- | ------ |
+| Packer  | Create Github Repo for creating Packer Images   |
+| AADDS   | Creates Azure Active Directory Service          |
+| Bastion | Creates Azure Bastion Service with one Jumphost |
+| AVD     | Create the Azure Virtual Desktop                |
+| ------- | ------ |
