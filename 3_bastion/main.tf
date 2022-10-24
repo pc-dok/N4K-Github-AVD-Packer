@@ -1,8 +1,8 @@
 // NOTE: Create the Ressource Groups in Azure West Europe for the Azure Virtual Desktop Service
 # Import first the data because we use 3 github workflow actions with different terrafrom cloud workspaces
-# Import Data from the Packer Image for WVD
+# Import Data from the Packer Image for WVD - take that image with the highest build number
+
 data "azurerm_image" "win2022" {
-  #name                = azurerm_image.win2022.name
   resource_group_name = var.artifacts
   name_regex   = "2022-*"
 }
