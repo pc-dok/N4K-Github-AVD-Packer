@@ -1,8 +1,9 @@
 // NOTE: Create the HostPool and Sessionhost for WVD
 # Import Data from the Packer Image
 data "azurerm_image" "win11" {
-  name_regex   = "win11-*"
+  name_regex          = "^win11-22h2-avd-\d{5}.\d{3}.\d{6}"
   resource_group_name = var.artifacts
+  sort_descending     = true
 }
   
 # Import Data from the Bastion

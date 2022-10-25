@@ -4,7 +4,8 @@
 
 data "azurerm_image" "win2022" {
   resource_group_name = var.artifacts
-  name_regex   = "2022-*"
+  name_regex          = "^2022-datacenter-azure-edition-smalldisk-\d{5}.\d{3}.\d{6}"
+  sort_descending     = true
 }
   
 # Import Data from the AADDS
