@@ -481,8 +481,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: 1 * * * *
 
 env:
   IMAGE_PUBLISHER: MicrosoftWindowsServer
@@ -626,8 +624,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: 30 * * * *
 
 env:
   IMAGE_PUBLISHER: MicrosoftWindowsDesktop
