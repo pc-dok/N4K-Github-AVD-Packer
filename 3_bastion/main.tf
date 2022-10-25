@@ -3,8 +3,9 @@
 # Import Data from the Packer Image for WVD - take that image with the highest build number
 
 data "azurerm_image" "win2022" {
+  name                = "2022-datacenter-azure-edition-smalldisk-20348.887.220806"
   resource_group_name = var.artifacts
-  name                = "2022-*"
+
 }
   
 # Import Data from the AADDS
