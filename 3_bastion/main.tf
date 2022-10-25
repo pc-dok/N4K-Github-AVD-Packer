@@ -4,7 +4,7 @@
 
 data "azurerm_image" "win2022" {
   resource_group_name = var.artifacts
-  name_regex          = "2022-datacenter-azure-edition-smalldisk-*"
+  name                = "2022-datacenter-azure-edition-smalldisk-*"
   sort_descending     = true
 }
   
