@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = "N4K"
+    organization = var.tf-org
 
     workspaces {
-      name = "3_Github-AVD-Bastion"
+      name = var.tf-ws-bastion
     }
   }
   
