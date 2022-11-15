@@ -486,6 +486,7 @@ env:
   IMAGE_PUBLISHER: MicrosoftWindowsServer
   IMAGE_OFFER: WindowsServer
   IMAGE_SKU: 2022-datacenter-azure-edition-smalldisk
+  IMAGE_URN: MicrosoftWindowsServer:WindowsServer:2022-datacenter-azure-edition-smalldisk:latest
 
 jobs:
   latest_windows_version:
@@ -506,18 +507,12 @@ jobs:
           azcliversion: 2.34.1
           inlineScript: |
             latest_version=$(
-              az vm image list \
-                --publisher "$${IMAGE_PUBLISHER}" \
-                --offer "$${IMAGE_OFFER}" \
-                --sku "$${IMAGE_SKU}" \
-                --all \
-                --query "[*].version | sort(@)[-1:]" \
-                --out tsv
+              az vm image show \
+                --urn "$${IMAGE_URN}" \
+                --query name \
+                --output tsv
             )
 
-            echo "Publisher: $${IMAGE_PUBLISHER}"
-            echo "Offer:     $${IMAGE_OFFER}"
-            echo "SKU:       $${IMAGE_SKU}"
             echo "Version:   $${latest_version}"
 
             echo "::set-output name=version::$${latest_version}"
@@ -629,6 +624,7 @@ env:
   IMAGE_PUBLISHER: MicrosoftWindowsDesktop
   IMAGE_OFFER: windows-11
   IMAGE_SKU: win11-22h2-avd
+  IMAGE_URN: MicrosoftWindowsDesktop:windows-11:win11-22h2-avd:latest
 
 jobs:
   latest_windows_version:
@@ -649,22 +645,17 @@ jobs:
           azcliversion: 2.34.1
           inlineScript: |
             latest_version=$(
-              az vm image list \
-                --publisher "$${IMAGE_PUBLISHER}" \
-                --offer "$${IMAGE_OFFER}" \
-                --sku "$${IMAGE_SKU}" \
-                --all \
-                --query "[*].version | sort(@)[-1:]" \
-                --out tsv
+              az vm image show \
+                --urn "$${IMAGE_URN}" \
+                --query name \
+                --output tsv
             )
 
-            echo "Publisher: $${IMAGE_PUBLISHER}"
-            echo "Offer:     $${IMAGE_OFFER}"
-            echo "SKU:       $${IMAGE_SKU}"
             echo "Version:   $${latest_version}"
 
             echo "::set-output name=version::$${latest_version}"
-
+          
+        
   check_image_exists:
     name: Check if latest version has already been built
     runs-on: ubuntu-latest
