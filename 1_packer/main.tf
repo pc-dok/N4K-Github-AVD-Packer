@@ -653,8 +653,7 @@ jobs:
 
             echo "Version:   $${latest_version}"
 
-            echo "::set-output name=version::$${latest_version}"
-          
+            echo "::set-output name=version::$${latest_version}"          
         
   check_image_exists:
     name: Check if latest version has already been built
