@@ -470,6 +470,7 @@ EOT
   overwrite_on_create = true
 }
 
+# Edit this entry on 15112022 - with IMAGE_URN
 resource "github_repository_file" "packerserver2022yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
@@ -608,6 +609,7 @@ EOT
   overwrite_on_create = true
 }              
 
+# Edit this entry on 15112022 - with IMAGE_URN
 resource "github_repository_file" "packerwin11yml" {
   repository          = github_repository.packer_windows_avd.name
   branch              = "main"
