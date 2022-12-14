@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = var.tf-org
+    organization = "N4K"
 
     workspaces {
-      name = var.tf-ws-aadds
+      name = "2_Github-AVD-AADDS"
     }
   }
   
